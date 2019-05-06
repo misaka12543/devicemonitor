@@ -5,6 +5,7 @@
 #include <QtSerialPort>
 #include <QSpinBox>
 #include "cancel_bugs.h"
+#include "scarray.h"
 
 namespace Ui {
 class ULT_monitor_Page;

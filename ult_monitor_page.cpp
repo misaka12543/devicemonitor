@@ -133,7 +133,8 @@ void ULT_monitor_Page::receive_port_data()
         }// !head_check
 
         data_read(data,data_offset,data_leng);
-    }//tester for block
+    }//tester for block end
+
 }
 void ULT_monitor_Page::data_read(QByteArray data,int dataOffset, int leng)
 {
@@ -163,7 +164,9 @@ QByteArray ULT_monitor_Page::data_split(QByteArray data,int dataOffset)
 
     SCArray the_data;
 
-    for (;spliter<leng;spliter++) {
+    for (;spliter<leng;spliter++)
+    {
+
         int current_dataHex = data[spliter];
 //        if(current_dataHex==Headsign)
 //            continue;
@@ -195,6 +198,10 @@ QByteArray ULT_monitor_Page::data_split(QByteArray data,int dataOffset)
                        next_block=true;
                        continue;
                    }
+               }
+               else
+               {
+                   return nullptr;
                }
             }
         }
