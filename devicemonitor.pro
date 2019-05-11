@@ -32,7 +32,13 @@ SOURCES += \
     mainwindow_list_ver.cpp \
     ult_monitor_page.cpp \
     scarray.cpp \
-    setting_value.cpp
+    setting_value.cpp \
+    temp_monitor_page.cpp \
+    humi_monitor_page.cpp \
+    tev_monitor_page.cpp \
+    vib_monitor_page.cpp \
+    sf6_monitor_page.cpp \
+    show_log_page.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,13 +47,25 @@ HEADERS += \
     ult_monitor_page.h \
     cancel_bugs.h \
     scarray.h \
-    setting_value.h
+    setting_value.h \
+    temp_monitor_page.h \
+    humi_monitor_page.h \
+    tev_monitor_page.h \
+    vib_monitor_page.h \
+    sf6_monitor_page.h \
+    show_log_page.h
 
 FORMS += \
         mainwindow.ui \
     setting_page.ui \
     mainwindow_list_ver.ui \
-    ult_monitor_page.ui
+    ult_monitor_page.ui \
+    temp_monitor_page.ui \
+    humi_monitor_page.ui \
+    tev_monitor_page.ui \
+    vib_monitor_page.ui \
+    sf6_monitor_page.ui \
+    show_log_page.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

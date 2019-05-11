@@ -37,6 +37,14 @@ private slots:
 
     void textses();
 
+    void on_VIB_button_clicked();
+
+    void on_TEV_button_clicked();
+
+    void on_Temp_Button_clicked();
+
+    void on_SF6_button_clicked();
+
 private:
     Ui::MainWindow *ui;
 

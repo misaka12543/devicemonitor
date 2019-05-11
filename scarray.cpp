@@ -1,4 +1,5 @@
 #include <scarray.h>
+
 SCArray::SCArray(int s) : size(s)
 {
     if (s == 0)

@@ -1,4 +1,4 @@
-#include "setting_value.h"
+    #include "setting_value.h"
 
 class Setting_valueData : public QSharedData
 {

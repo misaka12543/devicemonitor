@@ -12,3 +12,14 @@ tev_monitor_page::~tev_monitor_page()
 {
     delete ui;
 }
+
+void tev_monitor_page::receive_show()
+{
+    this->show();
+}
+
+void tev_monitor_page::on_pushButton_clicked()
+{
+    this->hide();
+    emit back_main();
+}

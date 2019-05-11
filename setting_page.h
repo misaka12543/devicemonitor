@@ -26,6 +26,7 @@ private slots:
 
 private:
     Ui::setting_page *ui;
+
 signals:
     void back_main();
 };

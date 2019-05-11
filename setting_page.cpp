@@ -34,3 +34,4 @@ void setting_page::receive_show()
 {
     this->show();
 }
+

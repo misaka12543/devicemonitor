@@ -17,6 +17,14 @@ public:
 
 private:
     Ui::tev_monitor_page *ui;
+
+private slots:
+    void receive_show();
+
+    void on_pushButton_clicked();
+
+signals:
+    void back_main();
 };
 
 #endif // TEV_MONITOR_PAGE_H

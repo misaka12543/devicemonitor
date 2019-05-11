@@ -24,6 +24,7 @@ private slots:
 
 private:
     Ui::MainWindow_list_ver *ui;
+
 signals:
     void back_main();
 };

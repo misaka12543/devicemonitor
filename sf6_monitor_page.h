@@ -17,6 +17,14 @@ public:
 
 private:
     Ui::sf6_monitor_page *ui;
+
+private slots:
+    void receive_show();
+
+    void on_pushButton_clicked();
+
+signals:
+    void back_main();
 };
 
 #endif // SF6_MONITOR_PAGE_H

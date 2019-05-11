@@ -12,3 +12,14 @@ sf6_monitor_page::~sf6_monitor_page()
 {
     delete ui;
 }
+
+void sf6_monitor_page::receive_show()
+{
+    this->show();
+}
+
+void sf6_monitor_page::on_pushButton_clicked()
+{
+    this->hide();
+    emit back_main();
+}

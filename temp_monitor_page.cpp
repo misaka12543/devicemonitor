@@ -12,3 +12,14 @@ temp_monitor_page::~temp_monitor_page()
 {
     delete ui;
 }
+
+void temp_monitor_page::receive_show()
+{
+    this->show();
+}
+
+void temp_monitor_page::on_pushButton_clicked()
+{
+    this->hide();
+    emit back_main();
+}
