@@ -139,15 +139,15 @@ void ULT_monitor_Page::receive_port_data()
 void ULT_monitor_Page::data_read(QByteArray data,int dataOffset, int leng)
 {
     int count = 0;
-    SCArray true_data;
+    QByteArray true_data = QByteArray::fromHex("");
     int current_data=0x00;
 
     if(leng==0x00)
-        return;
+        true_data = QByteArray::fromHex("");    //empty data phase
     for (;count<leng;count++)
     {
-        current_data=data[dataOffset+count];
-        true_data.push_back(current_data);
+        current_data=data.at(dataOffset+count);//[dataOffset+count];
+        true_data.append(current_data);
     }
 
 }

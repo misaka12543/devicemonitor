@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     QObject::connect(&w,SIGNAL(setting_show()),&setp,SLOT(receive_show()));
 
     QObject::connect(&w,SIGNAL(humidetail_show()),&humip,SLOT(receive_show()));
-    QObject::connect(&w,SIGNAL(tempfetail_show()),&tempp,SLOT(receive_show()));
+    QObject::connect(&w,SIGNAL(tempsdetail_show()),&tempp,SLOT(receive_show()));
     QObject::connect(&w,SIGNAL(tevdetail_show()),&tevp,SLOT(receive_show()));
     QObject::connect(&w,SIGNAL(ultdetil_show()),&ultp,SLOT(receive_show()));
     QObject::connect(&w,SIGNAL(vibdetail_show()),&vibp,SLOT(receive_show()));

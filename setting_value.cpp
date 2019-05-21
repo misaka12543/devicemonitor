@@ -4,33 +4,34 @@ class Setting_valueData : public QSharedData
 {
 public:
 
-
+//what's this ? I forget it ...
 };
 
+int R_RATE_TEMP=5;
+
+int R_RATE_HUMI=5;
+
+int R_RATE_ULT=5;
+
+int R_RATE_TEV=5;
+
+int R_RATE_VIB=5;
+
+int R_RATE_SF6=50;
+
+
+
+
+
+ ///set
+
+bool UNIT_TEMP=false;
+
+bool MAIN_SET=true;
+bool PAGE_MAIN=false;
 Setting_value::Setting_value() : data(new Setting_valueData)
 {
-//    R_RATE_TEMP=5;
 
-//    R_RATE_HUMI=5;
-
-//    R_RATE_ULT=5;
-
-//    R_RATE_TEV=5;
-
-//    R_RATE_VIB=5;
-
-//    R_RATE_SF6=50;
-
-
-
-
-
-//    ///set
-
-//    UNIT_TEMP=false;
-
-//    MAIN_SET=true;
-//    PAGE_MAIN=false;
 
 }
 
@@ -52,14 +53,14 @@ Setting_value::~Setting_value()
 }
 void Setting_value::R_RATE_TEMP_SET(int ipt)
 {
-    Setting_value::R_RATE_TEMP=ipt;
+    R_RATE_TEMP=ipt;
 }
 void Setting_value::Temp_Statue_Set(bool swt)
 {
-    Setting_value::UNIT_TEMP=swt;
+    UNIT_TEMP=swt;
 }
 bool Setting_value::Temp_Statue_get()
 {
 
-    return Setting_value::UNIT_TEMP;
+    return UNIT_TEMP;
 }

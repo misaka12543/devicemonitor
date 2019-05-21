@@ -109,3 +109,8 @@ void MainWindow::on_SF6_button_clicked()
     this->hide();
     emit sf6detail_show();
 }
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    QApplication::exit(0);
+}

@@ -45,6 +45,8 @@ private slots:
 
     void on_SF6_button_clicked();
 
+    void on_pushButton_6_clicked();
+
 private:
     Ui::MainWindow *ui;
 

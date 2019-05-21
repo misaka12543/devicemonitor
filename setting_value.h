@@ -5,26 +5,24 @@
 
 #include <QSharedDataPointer>
 
+extern int R_RATE_TEMP;
+extern int R_RATE_HUMI;
+extern int R_RATE_ULT;
+extern int R_RATE_TEV;
+extern int R_RATE_VIB;
+extern int R_RATE_SF6;
+
+
+////set
+extern bool UNIT_TEMP;
+extern bool MAIN_SET;
+extern bool PAGE_MAIN;
+
 class Setting_valueData;
 
 class Setting_value
 {
 public:
-    //namespace ssss{
-    static int R_RATE_TEMP;
-    static int R_RATE_HUMI;
-    static int R_RATE_ULT;
-    static int R_RATE_TEV;
-    static int R_RATE_VIB;
-    static int R_RATE_SF6;
-
-
-    ////set
-    static bool UNIT_TEMP;
-    static bool MAIN_SET;
-    static bool PAGE_MAIN;
-
-
     Setting_value();
     Setting_value(const Setting_value &);
     Setting_value &operator=(const Setting_value &);
