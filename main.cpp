@@ -17,6 +17,12 @@
 #include "tev_monitor_page.h"
 #include "humi_monitor_page.h"
 
+extern int app_version ;
+extern double app_version_D ;
+
+int app_version = 3;
+double app_version_D = app_version*0.1;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
