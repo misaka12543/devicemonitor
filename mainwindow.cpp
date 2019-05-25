@@ -68,6 +68,7 @@ void MainWindow::on_pushButton_3_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     this->hide();
+    this->setWindowFlag(Qt::SubWindow);
     emit listview_show();
 }
 //switch to setting page
@@ -122,7 +123,11 @@ void MainWindow::on_SF6_button_clicked()
     //this->hide();
     emit sf6detail_show();
 }
-
+//switch to log page
+void MainWindow::on_pushButton_7_clicked()
+{
+    emit log_show();
+}
 //exit button
 void MainWindow::on_pushButton_6_clicked()
 {

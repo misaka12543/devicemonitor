@@ -2,12 +2,7 @@
 #define SCARRAY_H
 #pragma once
 /**
-  This file is to define a new array type named SCArray
-  It's a int type Array,but the length is variable
-  I copy it from my other program,so it have chinese Commented Out :)
-  (I forget install any chinese IME on my linux system,I forget install it,and that's it)
-  (Maybe Qt have same type or more functional array type,but I like use this one XD )
-  (if this still not work ,I'll delete it)
+  Forget this file .... It make lots of error
 */
 #include <iostream>
 #include <cstring>

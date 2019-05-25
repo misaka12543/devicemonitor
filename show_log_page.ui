@@ -54,31 +54,61 @@
         <property name="text">
          <string>Temp</string>
         </property>
+        <item>
+         <property name="text">
+          <string>Temp Sensor 1</string>
+         </property>
+        </item>
        </item>
        <item>
         <property name="text">
          <string>HUMI</string>
         </property>
+        <item>
+         <property name="text">
+          <string>HUMI sensor 1</string>
+         </property>
+        </item>
        </item>
        <item>
         <property name="text">
          <string>ULT</string>
         </property>
+        <item>
+         <property name="text">
+          <string>ULT sensor 1</string>
+         </property>
+        </item>
        </item>
        <item>
         <property name="text">
          <string>SF6</string>
         </property>
+        <item>
+         <property name="text">
+          <string>SF6 sensor 1</string>
+         </property>
+        </item>
        </item>
        <item>
         <property name="text">
          <string>VIB</string>
         </property>
+        <item>
+         <property name="text">
+          <string>VIB sensor 1</string>
+         </property>
+        </item>
        </item>
        <item>
         <property name="text">
          <string>TEV</string>
         </property>
+        <item>
+         <property name="text">
+          <string>TEV sensor 1</string>
+         </property>
+        </item>
        </item>
       </widget>
      </item>
@@ -117,10 +147,10 @@
          <string>0</string>
         </property>
         <property name="text">
-         <string/>
+         <string>0</string>
         </property>
         <property name="text">
-         <string/>
+         <string>0</string>
         </property>
        </item>
        <item>
@@ -128,7 +158,10 @@
          <string>0</string>
         </property>
         <property name="text">
-         <string/>
+         <string>0</string>
+        </property>
+        <property name="text">
+         <string>0</string>
         </property>
        </item>
        <item>
@@ -136,7 +169,10 @@
          <string>0</string>
         </property>
         <property name="text">
-         <string/>
+         <string>0</string>
+        </property>
+        <property name="text">
+         <string>0</string>
         </property>
        </item>
       </widget>

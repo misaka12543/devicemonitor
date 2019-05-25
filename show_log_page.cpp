@@ -5,11 +5,11 @@
 
 #include <QTextStream>
 
-extern QDir Log_main;
-extern QDir log_detail;
+extern QDir Log_main_dir;
+extern QDir log_detail_dir;
 
-QDir Log_main("/root/DeviceMonitorLog");
-QDir log_detail("/root/DeviceMonitorLog/Log");
+QDir Log_main_dir("/root/DeviceMonitorLog");
+QDir log_detail_dir("/root/DeviceMonitorLog/Log");
 QFile humi_log("/root/DeviceMonitorLog/Log/humi_log");
 QFile sf6_log("/root/DeviceMonitorLog/Log/sf6_log");
 QFile temp_log("/root/DeviceMonitorLog/Log/temp_log");
@@ -23,7 +23,7 @@ show_log_page::show_log_page(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::show_log_page)
 {
-    ui->setupUi(this);
+
 }
 
 show_log_page::~show_log_page()
@@ -45,10 +45,12 @@ void show_log_page::on_pushButton_clicked()
 int show_log_page::read_log(int x)
 {
 
+
     //not finished!!!!!!!!
     switch(x)
     {
     case 1:
+
         break;
     case 2:
         break;
@@ -65,7 +67,8 @@ int show_log_page::read_log(int x)
     }
     if(!log_main.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        return -1;
+        log_main.open(QIODevice::ReadOnly | QIODevice::Text);
+
     }
 
     QTextStream txtInput(&log_main);
