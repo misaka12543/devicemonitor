@@ -2,6 +2,8 @@
 #include <QApplication>
 #include <QtSerialPort>
 
+#include <QFile>
+
 //key page
 #include "mainwindow_list_ver.h"
 #include "setting_page.h"
@@ -27,6 +29,13 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    QDateTime current_date_time =QDateTime::currentDateTime();///system time get
+    QDir log_Dir_Path ("/root/DeviceMonitorLog");
+    QFile log_file_path ("/root/DeviceMonitorLog/Log.txt"); ///default log path
+
+    QString create_success = "------Log File Create Success!------\n";
+    QString open_application = "Application start running at:"+current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz")+"\n";
+
     MainWindow w;
     MainWindow_list_ver wlv;
 
@@ -38,7 +47,6 @@ int main(int argc, char *argv[])
     ULT_monitor_Page ultp;
     vib_monitor_page vibp;
     sf6_monitor_page sf6p;
-
 
     w.show();
 
@@ -66,6 +74,39 @@ int main(int argc, char *argv[])
     QObject::connect(&vibp,SIGNAL(back_main()),&w,SLOT(receive_show()));
     QObject::connect(&sf6p,SIGNAL(back_main()),&w,SLOT(receive_show()));
 
+
+    QString currentDir = log_Dir_Path.currentPath();
+   //if filePath not exist , create it
+    if(!log_Dir_Path.exists())
+    {
+        qDebug()<<"path not exist"<<endl;
+        log_Dir_Path.mkpath("/root/DeviceMonitorLog");
+    }
+   QFile *tempFile = new QFile;
+   //set progream running path under filePath
+   log_Dir_Path.setCurrent("/root/DeviceMonitorLog");
+   qDebug()<<log_Dir_Path.currentPath();
+   //chech if filePath exist file named fileName,if yes ......
+   if(tempFile->exists("/root/DeviceMonitorLog"))
+   {
+        qDebug()<<"file exist";
+   }
+   //create log file if not exist
+   QFileInfo fileinfo(log_file_path);
+   if(!(fileinfo.exists()))
+   {
+       log_file_path.open(QIODevice::WriteOnly|QIODevice::Text);
+       log_file_path.close();
+       log_file_path.open(QIODevice::ReadWrite);
+       log_file_path.write(create_success.toUtf8());
+       log_file_path.close();
+   }
+   else//write app start log
+   {                        //RW mode           add to end mode     text mode
+       log_file_path.open(QIODevice::ReadWrite|QIODevice::Append|QIODevice::Text);
+       log_file_path.write(open_application.toUtf8());
+       log_file_path.close();
+   }
 
 
     return a.exec();

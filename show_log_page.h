@@ -2,6 +2,16 @@
 #define SHOW_LOG_PAGE_H
 
 #include <QMainWindow>
+#include <QFile>
+
+extern QFile humi_log;
+extern QFile sf6_log;
+extern QFile temp_log;
+extern QFile vib_log;
+extern QFile tev_log;
+extern QFile ult_log;
+extern QFile log_log;
+extern QFile log_main;
 
 namespace Ui {
 class show_log_page;

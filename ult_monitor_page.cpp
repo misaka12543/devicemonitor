@@ -82,6 +82,7 @@ void ULT_monitor_Page::openPort()
 
 }
 
+///recive all data from port
 void ULT_monitor_Page::receive_port_data()
 {
     QByteArray data = ult_port->readAll();
@@ -136,6 +137,8 @@ void ULT_monitor_Page::receive_port_data()
     }//tester for block end
 
 }
+
+///read useful data and return
 void ULT_monitor_Page::data_read(QByteArray data,int dataOffset, int leng)
 {
     int count = 0;
@@ -144,12 +147,16 @@ void ULT_monitor_Page::data_read(QByteArray data,int dataOffset, int leng)
 
     if(leng==0x00)
         true_data = QByteArray::fromHex("");    //empty data phase
-    for (;count<leng;count++)
+    else
     {
-        current_data=data.at(dataOffset+count);//[dataOffset+count];
-        true_data.append(current_data);
+        for (;count<leng;count++)
+        {
+            current_data=data.at(dataOffset+count);//[dataOffset+count];
+            true_data.append(current_data);
+        }
     }
-
+    //here,true data is all data really need
+    ;
 }
 QByteArray ULT_monitor_Page::data_split(QByteArray data,int dataOffset)
 {
