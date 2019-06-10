@@ -107,6 +107,8 @@ int main(int argc, char *argv[])
     QObject::connect(&vibp,SIGNAL(back_main()),&w,SLOT(receive_show()));
     QObject::connect(&sf6p,SIGNAL(back_main()),&w,SLOT(receive_show()));
 
+    QObject::connect(&ultp,SIGNAL(setting_show()),&setp,SLOT(receive_show()));
+
 
     QString currentDir = log_Dir_Path.currentPath();
     //create log dir

@@ -167,12 +167,16 @@ void ULT_monitor_Page::data_read(QByteArray data,int dataOffset, int leng)      
     //here,true data is all data really need
     ;
 }
-QByteArray ULT_monitor_Page::data_split(QByteArray data,int dataOffset)  //rewrite!
+port_out ULT_monitor_Page::data_split(QByteArray data,int dataOffset)  //rewrite!
 {
     QByteArray taildata;
     QByteArray tmp_data;
-    QByteArray out_data;            //data_output
     QByteArray current_data;
+
+    port_out out;                   //output_data
+    port_out largeout;
+
+    bool time_flag=false;           //time data flag
     taildata.fromHex("cc33c33c");   //taildata
     int blocks = 0;                 //how many blocks read
     int leng_check;                 //data length read from data
@@ -203,28 +207,37 @@ QByteArray ULT_monitor_Page::data_split(QByteArray data,int dataOffset)  //rewri
 
         }
     }
-    else
+    else                                                            //here is single return data
     {
-        data.remove(0,3);           //remove whole head
+        data.remove(0,3);                                           //remove whole head
 
-        for (int loop_b1=0;loop_b1<=leng_check;loop_b1+=4)   //loop for read per data block
+        for (int loop_b1=0;loop_b1<=leng_check;loop_b1+=4)          //loop for read per data block
         {
-            for (int loop_b2=0;loop_b2<4;loop_b2++)         //loop for read per small block
+            for (int loop_b2=0;loop_b2<4;loop_b2++)                 //loop for read per small block
             {
-                current_data.prepend(data.at(loop_b1+loop_b2)); //read data and rev
+                current_data.prepend(data.at(loop_b1+loop_b2));     //read data and rev
             }
-            tmp_data.append(current_data);                      //now,tmp_data have current_data's data
-
+            tmp_data.append(current_data);                          //now,tmp_data have current_data's data,one small block
+            bool conv_succ;
+            if(!time_flag)
+            {
+                out.st = tmp_data.toInt(&conv_succ,16);
+            }
+            else
+            {
+                out.time = tmp_data.toInt(&conv_succ,16);
+            }
+            time_flag=!time_flag;
         }
 
     }
-    return out_data;                //warning! Data out here without any define
+    return out;                                                     //warning! Data out here without any define
 }
 
 
 
 
-void ULT_monitor_Page::on_pushButton_2_clicked()    //refresh button
+void ULT_monitor_Page::on_pushButton_2_clicked()                     //refresh button
 {
     emit refresh_button_clicked();
 
@@ -233,4 +246,9 @@ void ULT_monitor_Page::on_pushButton_2_clicked()    //refresh button
     receive_port_data();
 
     this->ui->Current_RSSI->setText("");
+}
+
+void ULT_monitor_Page::on_pushButton_3_clicked()                    //setting button
+{
+    emit setting_show();
 }

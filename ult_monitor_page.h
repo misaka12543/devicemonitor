@@ -7,6 +7,12 @@
 #include "cancel_bugs.h"
 #include "scarray.h"
 
+struct port_out
+{
+    int time;
+    int st;
+};
+
 namespace Ui {
 class ULT_monitor_Page;
 }
@@ -23,7 +29,7 @@ public:
     void initUI();
 
     ///split data
-    QByteArray data_split(QByteArray data,int dataOffset);
+    port_out data_split(QByteArray data,int dataOffset);
 
     ///analize data,save all data into one SCarray(it's a int array)
     void data_read(QByteArray data,int dataOffset, int leng);
@@ -84,6 +90,8 @@ private slots:
 
 
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::ULT_monitor_Page *ui;
     QSerialPort* ult_port;
@@ -97,6 +105,7 @@ private:
 signals:
     void back_main();
     void refresh_button_clicked();
+    void setting_show();
 };
 
 #endif // ULT_MONITOR_PAGE_H
