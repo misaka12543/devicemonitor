@@ -74,7 +74,7 @@ private slots:
     void receive_show();
 
     ///getdatafromport
-    void receive_port_data();
+    QByteArray receive_port_data();
 
     ///refresh button
     void on_pushButton_2_clicked();

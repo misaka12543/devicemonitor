@@ -7,6 +7,7 @@
 //key page
 #include "mainwindow_list_ver.h"
 #include "setting_page.h"
+#include "setting_value.h"
 
 //log page
 #include "show_log_page.h"
@@ -57,6 +58,8 @@ int main(int argc, char *argv[])
     QFile log_log("/root/DeviceMonitorLog/Log/log_log");
     ///main log path
     QFile log_main("/root/DeviceMonitorLog/Log.txt");
+    ///
+    QFile setting_value("/root/DeviceMonitorLog/Settings.val");
 
     QString create_success = "------Log File Create Success!------\n";
     QString open_application = "Application start running at:"+current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz")+"\n";
@@ -238,6 +241,21 @@ int main(int argc, char *argv[])
        //do nothing
    }
 
+   QFileInfo setting_value_file(setting_value);
+   if(!setting_value_file.exists())
+   {
+
+       setting_value.open(QIODevice::WriteOnly|QIODevice::Text);
+       setting_value.close();
+       setting_value.open(QIODevice::ReadWrite);
+       int x = all_value.R_RATE_ULT;
+       setting_value.write("");
+       setting_value.close();
+   }
+   else
+   {
+
+   }
 
 
     return a.exec();

@@ -8,6 +8,8 @@ Refresh rate must be greater than 0.
 
 Default Setting is ℃
 
+window may not fit to divice display
+
 ### This program is Unfinished!
 ## [Progress tracking](https://github.com/misaka12543/devicemonitor/projects/1)
 

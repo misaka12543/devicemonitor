@@ -83,27 +83,29 @@ void ULT_monitor_Page::openPort()
 }
 
 ///recive all data from port
-void ULT_monitor_Page::receive_port_data()
+QByteArray ULT_monitor_Page::receive_port_data()
 {
-    QByteArray data = ult_port->readAll();
+    QByteArray data = ult_port->readAll();      //all_really_read_data_here
 
 
-    bool fail_data=false;
-    const int alldatalen = data.length();
+
+    bool fail_data=false;                   //broken data flag
+    const int alldatalen = data.length();   //data length
     int data_leng=0x00;                     //length data 0x00~0xff
-    int datahex;                            //this data
+    int datahex;                            //current data
     int data_offset=0;                      //if first data not 0xaa,0xaa position is 0+this
     bool need_head_check = false;
     bool head_check = false;                //head check flag
-    data.count();
-    for (int tester=0;tester<alldatalen;tester++)
+    //data.count();   //???wtf
+    for (int tester=0;tester<=alldatalen;tester++)
     {
         datahex = data[tester];
-        if(!head_check)                     //check 1st 0xaa position,and set value to data_offset
+        if(!head_check)                     //check 1st 0xaa position,and set value to data_offset (always 0)
         {
              if(datahex == 0xaa && tester==0)
              {
                  data_offset = 0;
+                 break;
              }
              if(datahex != 0xaa && tester==0)
              {
@@ -127,19 +129,26 @@ void ULT_monitor_Page::receive_port_data()
                      continue;
                  }
              }//need_head_check
+             head_check=true;
+        }// head_check over
+        else {
 
-             data_split(data,data_offset);
-           data_leng=data[data_offset+data_leng_offset_receive];//find data
-           head_check=true;
-        }// !head_check
-
-        data_read(data,data_offset,data_leng);
+        }
     }//tester for block end
+    if(fail_data)
+    {
+        data = nullptr;//piu~
+        return data;
+    }
+    data_split(data,data_offset);
+    data_leng=data[data_offset+data_leng_offset_receive];//find data
+    data_read(data,data_offset,data_leng);
 
+    return data;
 }
 
 ///read useful data and return
-void ULT_monitor_Page::data_read(QByteArray data,int dataOffset, int leng)
+void ULT_monitor_Page::data_read(QByteArray data,int dataOffset, int leng)              //Rewrite!
 {
     int count = 0;
     QByteArray true_data = QByteArray::fromHex("");
@@ -158,65 +167,70 @@ void ULT_monitor_Page::data_read(QByteArray data,int dataOffset, int leng)
     //here,true data is all data really need
     ;
 }
-QByteArray ULT_monitor_Page::data_split(QByteArray data,int dataOffset)
+QByteArray ULT_monitor_Page::data_split(QByteArray data,int dataOffset)  //rewrite!
 {
-    int leng=data.length();
-    int spliter=0;
-    int blocks=0;
-    int match_num=1;
-    int data_block_leng=0;
-    bool next_block=false;
+    QByteArray taildata;
+    QByteArray tmp_data;
+    QByteArray out_data;            //data_output
+    QByteArray current_data;
+    taildata.fromHex("cc33c33c");   //taildata
+    int blocks = 0;                 //how many blocks read
+    int leng_check;                 //data length read from data
+    int leng=data.length();         //whole data length
+    int sensor = 0x00;
+    int type = 0x00;
 
-    spliter = dataOffset;
-
-    SCArray the_data;
-
-    for (;spliter<leng;spliter++)
+    if(dataOffset)                  //remove head
     {
+        data.remove(0,dataOffset+1); //remove junk data and head(0xaa)
+    }
+    else
+    {
+        data.remove(0,1);           //remove head 0xaa
+    }
 
-        int current_dataHex = data[spliter];
-//        if(current_dataHex==Headsign)
-//            continue;
-        if(next_block)
+    sensor=data.at(1);              //get sensor
+    type = data.at(2);              //get type
+    leng_check = data.at(3);        //get data_length
+
+
+    blocks = data.count(taildata);  //blocks count
+
+    if(blocks>1)                    //it said data not include time,200ms per point,need check length everyblock
+    {
+        for (;;)
         {
-            data_block_leng=data[spliter];
+
         }
-        if(current_dataHex==frame_tail_1)       //frame tail check
+    }
+    else
+    {
+        data.remove(0,3);           //remove whole head
+
+        for (int loop_b1=0;loop_b1<=leng_check;loop_b1+=4)   //loop for read per data block
         {
-            if(spliter<=(leng-4))
+            for (int loop_b2=0;loop_b2<4;loop_b2++)         //loop for read per small block
             {
-                int tail_tester[4] = {data[spliter],data[spliter+1],data[spliter+2],data[spliter+3]};
-                int i = 0;
-                while (i<4)             //compare tail
-                {
-                    if(tail_tester[i]==frame_tail[i])
-                        match_num += i;
-                }
-                if(match_num==4)        //frame_tail found
-                {
-                    blocks++;
-                }
-               if(leng>=(spliter+5))
-               {
-                   int head_try = data[spliter];
-                   if(head_try==Headsign)
-                   {
-                       spliter += 6; //jump to next data block
-                       next_block=true;
-                       continue;
-                   }
-               }
-               else
-               {
-                   return nullptr;
-               }
+                current_data.prepend(data.at(loop_b1+loop_b2)); //read data and rev
             }
+            tmp_data.append(current_data);                      //now,tmp_data have current_data's data
+
         }
 
     }
+    return out_data;                //warning! Data out here without any define
 }
-void ULT_monitor_Page::on_pushButton_2_clicked()
+
+
+
+
+void ULT_monitor_Page::on_pushButton_2_clicked()    //refresh button
 {
     emit refresh_button_clicked();
+
+
     openPort();
+    receive_port_data();
+
+    this->ui->Current_RSSI->setText("");
 }
